@@ -1,6 +1,7 @@
 import pygame
 from logger import log_state
 from constants import SCREEN_WIDTH, SCREEN_HEIGHT
+import player
 
 def main():
     pygame.init()
@@ -12,12 +13,16 @@ def main():
     clock = pygame.time.Clock()
     dt = 0 
 
+    #spawning in the player
+    spawn_player = player.Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
     #infinte loop that runs the game after pygame has been called
     while True:
         log_state()
         for event in pygame.event.get():
             pass
         screen.fill("black")
+        spawn_player.draw(screen)
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
