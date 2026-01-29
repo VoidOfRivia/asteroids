@@ -13,6 +13,13 @@ def main():
     clock = pygame.time.Clock()
     dt = 0 
 
+    #creating two empty groups
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    #adding the Player class to the udpateable and drawable groups
+    player.Player.containers = (updatable, drawable)
+
     #spawning in the player
     spawn_player = player.Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
@@ -22,7 +29,9 @@ def main():
         for event in pygame.event.get():
             pass
         screen.fill("black")
-        spawn_player.draw(screen)
+        updatable.update(dt)
+        for i in drawable:
+            i.draw(screen)
         pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
